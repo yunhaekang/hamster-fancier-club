@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="main">
+  <div class="slideshow">
+    <div id="main_img_bar">
+      <a href="#"><img src="images/main/hamster-fancier-club-main.jpg" alt="햄스터애호가클럽 메인 이미지"></a>
+      <!--     이미지 출처 https://pixabay.com/photos/hamster-nature-wild-animals-5189513/-->
+
+    </div>
+    <div id="slideshow_nav">
+      <a href="#" class="prev">prev</a>
+      <a href="#" class="next">next</a>
+    </div>
+    <div id="slideshow_indi">
+      <a href="#">&nbsp;&nbsp;</a>
+      <a href="#">&nbsp;&nbsp;</a>
+      <a href="#">&nbsp;&nbsp;</a>
+      <a href="#">&nbsp;&nbsp;</a>
+    </div>
+  </div>
+  <div id="main_content">
+    <div id="latest">
+      <h4>최근 게시글</h4>
+      <ul>
+        <!-- 최근 게시글 데이터 불러오기 -->
+        <li>아직 게시글이 없습니다.</li>
+      </ul>
+    </div>
+    <div id="point_rank">
+      <h4>포인트 랭킹</h4>
+      <ul>
+        <li>아직 가입된 회원이 없습니다.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</html>

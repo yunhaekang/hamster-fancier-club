@@ -12,8 +12,10 @@
     - 게시판에 글이나 댓글을 작성하면 포인트를 얻을 수 있다.
     - 포인트는 게시판마다 다르게 주어지고, 댓글은 작성시 1 포인트를 적립할 수 있다.
  2. ERD ver0.1
-    - 회원과 게시판에 대한 내용까지 정리  
-    <img src="https://github.com/yunhaekang/hamster-fancier-club/assets/140871418/d9309144-b0ab-45b8-9f3c-3717abdb7d5d">
+    - 회원과 게시판에 대한 내용까지 정리
+    - 레벨 관련 내용은 아직 고민 중...
+    - 회원과 회원 상세로 분리했던 엔티티를 합쳐서 수정
+    <img src="https://github.com/yunhaekang/hamster-fancier-club/assets/140871418/a4dc27c6-8f39-4fcc-aac4-02e9b2c1d6a5">
     
 ### 2023.10.16 요구사항 정의 + ERD 그리는 중  
 

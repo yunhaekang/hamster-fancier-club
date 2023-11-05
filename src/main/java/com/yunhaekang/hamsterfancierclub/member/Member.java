@@ -6,12 +6,17 @@ import lombok.Getter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+/**
+ * author: yunoi
+ * date: 2023-10-30
+ * description:
+ */
 @Entity
 @Getter
 public class Member {
 
     @Id @GeneratedValue
-    private int id;
+    private Long id;
 
     private String userId;
     private String password;
@@ -24,7 +29,12 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Level level;    // ENTRY, REGULAR, ADMIN
 
-    /* 회원 등록 */
+    /**
+     * name: 회원 등록
+     * author: yunoi
+     * date: 2023-10-30
+     * description:
+     */
     public void registerMember(String userId, String password, String name, String nickname, String phone, String email) {
         this.userId = userId;
         this.password = password;

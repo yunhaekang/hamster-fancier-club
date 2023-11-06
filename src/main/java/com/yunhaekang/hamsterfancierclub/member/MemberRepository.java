@@ -1,5 +1,6 @@
 package com.yunhaekang.hamsterfancierclub.member;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -12,10 +13,10 @@ import java.util.List;
  * description:
  */
 @Repository
+@RequiredArgsConstructor
 public class MemberRepository {
 
-    @PersistenceContext
-    private EntityManager em;
+    private final EntityManager em;
 
     /**
      * name: 회원 등록
@@ -54,11 +55,24 @@ public class MemberRepository {
      * author: yunoi
      * date: 2023-11-05
      * parameter: 회원 가입 ID
-     * description: 이미 사용 중인 ID 확인 등
+     * description:
      */
-    public List<Member> findUserId(String userId) {
+    public List<Member> findByUserId(String userId) {
         return em.createQuery("select m from Member m where m.userId = :userId", Member.class)
                 .setParameter("userId", userId)
                 .getResultList();
+    }
+
+    /**
+     * name: 회원 건수 조회
+     * author: yunoi
+     * date: 2023-11-05
+     * parameter: 회원 가입 ID
+     * description: 이미 사용 중인 ID 확인
+     */
+    public long countUserId(String userId) {
+        return em.createQuery("select count(*) from Member m where m.userId = :userId", Long.class)
+                .setParameter("userId", userId)
+                .getSingleResult();
     }
 }

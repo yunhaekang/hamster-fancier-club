@@ -1,10 +1,13 @@
 package com.yunhaekang.hamsterfancierclub.member;
 
 import com.yunhaekang.hamsterfancierclub.level.Level;
+import com.yunhaekang.hamsterfancierclub.post.Post;
 import lombok.Getter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * author: yunoi
@@ -16,8 +19,8 @@ import java.time.LocalDateTime;
 public class Member {
 
     @Id @GeneratedValue
+    @Column(name="member_id")
     private Long id;
-
     private String userId;
     private String password;
     private String name;
@@ -28,6 +31,8 @@ public class Member {
     private int point;
     @Enumerated(EnumType.STRING)
     private Level level;    // ENTRY, REGULAR, ADMIN
+    @OneToMany(mappedBy = "member")
+    private List<Post> posts = new ArrayList<>(); // 관례상 컬렉션 객체 초기화 해줌
 
     /**
      * name: 회원 등록

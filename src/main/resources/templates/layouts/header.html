@@ -12,10 +12,7 @@
         <div id="menu_bar">
             <ul>
                 <li id="li_first"><a href="/">HOME</a></li>
-                <li><a href="#">NOTICE</a></li>
-                <li><a href="#">MESSAGE</a></li>
-                <li><a href="#">BOARD</a></li>
-                <li><a href="#">MARKET</a></li>
+                <li th:each="board : ${boards}"><a href="#" th:text="${board.boardName}"></a></li>
             </ul>
         </div>
     </div>

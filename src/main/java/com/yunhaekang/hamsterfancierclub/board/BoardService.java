@@ -5,6 +5,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * author: yunoi
  * date: 2023-11-27
@@ -32,7 +35,18 @@ public class BoardService {
     }
 
     /**
-     * name: 가장 마지막 메뉴의 순서 가져오기
+     * name: 전체 게시판 조회
+     * author: yunoi
+     * date: 2023-11-28
+     * parameter:
+     * description:
+     */
+    public List<Board> getAllBoards () {
+        return boardRepository.findAll();
+    }
+
+    /**
+     * name: 가장 마지막 메뉴 순서 가져오기
      * author: yunoi
      * date: 2023-11-27
      * parameter:

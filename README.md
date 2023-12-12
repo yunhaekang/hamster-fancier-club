@@ -5,7 +5,13 @@
 햄스터를 테마로 제작한 커뮤니티형 웹 사이트이다.  
 2019년에 php를 공부하며 만든 게시판을 Spring Boot와 JPA 스터디를 위해 변환 작업 중...  
 화면과 CSS는 최소한으로 수정할 것이다. 정적 리소스도 기존보다 줄여서 시작할 예정이다.
-* ERD: https://www.erdcloud.com/d/CamhSoN89N5mo4SZx (비공개; 개인확인용. 추후 공개로 전환 예정)
+* ERD: https://www.erdcloud.com/d/CamhSoN89N5mo4SZx
+
+### 2023.12.12
+ERD ver0.4
+ - 게시글 설계 추가/변경
+ - 댓글 설계 추가/변경
+
 ### 2023.10.30
  1. 요구사항
     - 회원은 게시판에 글이나 댓글을 작성할 수 있다.
@@ -15,7 +21,6 @@
     - 회원과 게시판에 대한 내용까지 정리
     - 레벨 관련 내용은 아직 고민 중...
     - 회원과 회원 상세로 분리했던 엔티티를 합쳐서 수정
-    <img src="https://github.com/yunhaekang/hamster-fancier-club/assets/140871418/a4dc27c6-8f39-4fcc-aac4-02e9b2c1d6a5">
     
 ### 2023.10.16 요구사항 정의 + ERD 그리는 중  
 

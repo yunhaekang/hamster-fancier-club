@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>상세 보기</title>
+</head>
+<body>
+  제목: <span th:text="${post.subject}"></span><br/>
+  작성자: <span th:text="${post.writer}"></span><br/>
+  작성일시: <span th:text="${post.registerDateTime}"></span><br/>
+  내용 <br/>
+  <p th:text="${post.content}"></p>
+  <form action="@{/board/{boardId}/posts/{id}/comment (boardId=${post.boardId}, id=${post.postId})}" method="post">
+    댓글 <br/>
+    <textarea name="content"></textarea>
+    <input type="hidden" name="memberId" th:value="${post.memberId}" />
+    <button type="submit">댓글 쓰기</button>
+  </form>
+  <a href="#" th:href="@{/board/{boardId}/posts/{id}/edit (boardId=${post.boardId}, id=${post.postId})}" role="button">글 수정</a>
+  <a href="#" th:href="@{/board/{boardId}/posts/{id}/reply (boardId=${post.boardId}, id=${post.postId})}" role="button">답글 달기</a>
+</body>
+</html>

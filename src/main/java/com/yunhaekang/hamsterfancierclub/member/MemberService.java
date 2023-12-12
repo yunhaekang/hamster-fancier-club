@@ -42,7 +42,7 @@ public class MemberService {
      */
     private void validateDuplicateUserId(Member member) {
         // TODO: MEMBER 테이블의 user_id Unique 제약조건 설정할 것 20231105
-        if(memberRepository.countUserId(member.getUserId()) > 0) {
+        if(memberRepository.countUserId(member.getMemberJoinId()) > 0) {
             throw new IllegalStateException("이미 사용 중인 ID입니다.");
         }
     }
@@ -56,6 +56,17 @@ public class MemberService {
      */
     public List<Member> findMembers() {
         return memberRepository.findAll();
+    }
+
+    /**
+     * name: 전체 회원 수 조회
+     * author: yunoi
+     * date: 2023-12-07
+     * parameter:
+     * description:
+     */
+    public int countAllMembers() {
+        return memberRepository.countAllMembers().intValue();
     }
 
     /**

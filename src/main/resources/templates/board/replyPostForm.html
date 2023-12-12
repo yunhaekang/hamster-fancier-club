@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>댓글 쓰기</title>
+</head>
+<body>
+<form th:object="${form}" method="post">
+    제목: <input type="text" th:field="*{subject}" /><br/>
+    내용 <br/>
+    <textarea th:field="*{content}">
+    </textarea>
+    <input type="hidden" th:field="*{parentPostId}" />
+    <input type="hidden" th:field="*{postGroupId}" />
+    <input type="hidden" th:field="*{boardId}" />
+    <input type="hidden" th:field="*{memberId}" />
+    <button type="submit">댓글 저장</button>
+</form>
+</body>
+</html>

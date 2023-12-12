@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 페이지</title>
+    <link rel="icon" href="icon/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/admin.css">
+</head>
+<body>
+<header th:include="~{layouts/header :: header}"></header>
+<section>
+    <div id="admin_box">
+        <h3 class="member_title">
+            관리자 페이지 > 회원관리
+        </h3>
+        <span>총 회원 수: [[${memberCount}]]</span>
+        <ul id="member_list">
+            <li>
+                <span class="col1">고유번호</span>
+                <span class="col2">아이디</span>
+                <span class="col3">이름</span>
+                <span class="col4">레벨</span>
+                <span class="col5">포인트</span>
+                <span class="col6">가입일</span>
+                <span class="col7">수정</span>
+                <span class="col8">삭제</span>
+            </li>
+            <li th:each="member : ${members}">
+                <span class="col1" th:text="${member.id}"></span>
+                <span class="col2" th:text="${member.memberJoinId}"></span>
+                <span class="col3" th:text="${member.name}"></span>
+                <span class="col4"><input type="text" name="level" th:value="${member.level}"></span>
+                <span class="col5"><input type="text" name="point" th:value="${member.point}"></span>
+                <span class="col6" th:text="${member.registerDateTime}"></span>
+                <span class="col7"><button type="submit">수정</button></span>
+                <span class="col8"><button type="button" onclick="location.href='admin_member_crud.php?num=<?=$num?>&mode=delete'">삭제</button></span>
+            </li>
+        </ul>
+    </div>
+</section>
+<footer th:include="~{layouts/footer :: footer}"></footer>
+</body>
+</html>

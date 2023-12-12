@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>post_id</th>
+                <th>subject</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="post : ${posts}">
+                <td>[[${post.postId}]]</td>
+                <td><th:block th:with="depth=${post.depth}" th:text="${#strings.repeat('↳', depth)}"></th:block><a href="#" th:href="@{/board/{boardId}/posts/{id} (boardId=${post.boardId}, id=${post.postId})}" th:text="${post.subject}"></a></td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="@{/board/{boardId}/posts (boardId=${post.boardId})}">글쓰기</a>
+</body>
+</html>

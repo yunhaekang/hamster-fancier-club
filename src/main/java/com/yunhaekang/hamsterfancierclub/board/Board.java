@@ -1,9 +1,7 @@
 package com.yunhaekang.hamsterfancierclub.board;
 
-import com.yunhaekang.hamsterfancierclub.post.Post;
-import lombok.AllArgsConstructor;
+import com.yunhaekang.hamsterfancierclub.board.free.post.Post;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -18,7 +16,7 @@ import java.util.List;
 @Getter
 public class Board {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="board_id")
     private Long id;
     private String boardName;
@@ -26,6 +24,7 @@ public class Board {
     private int rewardPoint;
     @OneToMany(mappedBy = "board")
     private List<Post> posts = new ArrayList<>(); // 관례상 컬렉션 객체 초기화 해줌
+    private String boardPath;
 
     /**
      * name: 새 게시판 등록
@@ -34,9 +33,10 @@ public class Board {
      * parameter: 게시판명, 적립 포인트
      * description:
      */
-    public void createBoard (String boardName, int rewardPoint) {
+    public void createBoard (String boardName, int rewardPoint, String boardPath) {
         this.boardName = boardName;
         this.rewardPoint = rewardPoint;
+        this.boardPath = boardPath;
     }
 
     /**
@@ -70,5 +70,16 @@ public class Board {
      */
     public void editRewardPoint (int newRewardPoint) {
         this.rewardPoint = newRewardPoint;
+    }
+
+    /**
+     * name: 게시판 경로 변경
+     * author: yunoi
+     * date: 2023-11-29
+     * parameter:
+     * description:
+     */
+    public void editBoardPath (String newBoardPath) {
+        this.boardPath = newBoardPath;
     }
 }

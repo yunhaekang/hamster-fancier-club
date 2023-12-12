@@ -12,3 +12,9 @@ logging:
   level:
     org.hibernate.SQL: debug
     org.hibernate.type: trace
+
+# 테스트용 mybatis 추가 설정
+mybatis:
+  configuration:
+     map-underscore-to-camel-case: true
+  mapper-locations: /mapper/**/*.xml

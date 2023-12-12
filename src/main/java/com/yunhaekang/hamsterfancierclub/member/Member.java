@@ -1,7 +1,7 @@
 package com.yunhaekang.hamsterfancierclub.member;
 
 import com.yunhaekang.hamsterfancierclub.level.Level;
-import com.yunhaekang.hamsterfancierclub.post.Post;
+import com.yunhaekang.hamsterfancierclub.board.free.post.Post;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -18,13 +18,13 @@ import java.util.List;
 @Getter
 public class Member {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="member_id")
     private Long id;
-    private String userId;
+    private String memberJoinId;
     private String password;
     private String name;
-    private LocalDateTime registerDatetime;
+    private LocalDateTime registerDateTime;
     private String nickname;
     private String phone;
     private String email;
@@ -40,14 +40,14 @@ public class Member {
      * date: 2023-10-30
      * description:
      */
-    public void registerMember(String userId, String password, String name, String nickname, String phone, String email) {
-        this.userId = userId;
+    public void registerMember(String memberJoinId, String password, String name, String nickname, String phone, String email) {
+        this.memberJoinId = memberJoinId;
         this.password = password;
         this.name = name;
         this.nickname = nickname;
         this.phone = phone;
         this.email = email;
-        this.registerDatetime = LocalDateTime.now();
+        this.registerDateTime = LocalDateTime.now();
         this.point = 0;
         this.level = Level.ENTRY;
     }

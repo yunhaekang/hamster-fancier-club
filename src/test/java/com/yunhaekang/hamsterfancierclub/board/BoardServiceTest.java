@@ -31,7 +31,7 @@ class BoardServiceTest {
     void create_test () {
         // given
         Board board = new Board();
-        board.createBoard("test", 5);
+        board.createBoard("test", 5, "/board/test");
         // when
         Long id = service.create(board);
         // then
@@ -44,9 +44,9 @@ class BoardServiceTest {
         Board board1 = new Board();
         Board board2 = new Board();
         Board board3 = new Board();
-        board1.createBoard("test1", 6);
-        board2.createBoard("test2", 5);
-        board3.createBoard("test3", 5);
+        board1.createBoard("test1", 6, "/board/test1");
+        board2.createBoard("test2", 5, "/board/test2");
+        board3.createBoard("test3", 5, "/board/test3");
         Long id1 = service.create(board1);
         Long id2 = service.create(board2);
 

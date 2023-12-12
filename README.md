@@ -21,7 +21,6 @@ ERD ver0.4
     - 회원과 게시판에 대한 내용까지 정리
     - 레벨 관련 내용은 아직 고민 중...
     - 회원과 회원 상세로 분리했던 엔티티를 합쳐서 수정
-    <img src="https://github.com/yunhaekang/hamster-fancier-club/assets/140871418/a4dc27c6-8f39-4fcc-aac4-02e9b2c1d6a5">
     
 ### 2023.10.16 요구사항 정의 + ERD 그리는 중  
 

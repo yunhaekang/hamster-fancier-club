@@ -1,6 +1,6 @@
-package com.yunhaekang.hamsterfancierclub.board.free;
+package com.yunhaekang.hamsterfancierclub.board;
 
-import com.yunhaekang.hamsterfancierclub.board.free.post.*;
+import com.yunhaekang.hamsterfancierclub.board.post.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -10,66 +10,71 @@ import org.springframework.web.bind.annotation.*;
 /**
  * author: yunoi
  * date: 2023-12-07
- * description: 자유게시판 컨트롤러
+ * description: 게시판 컨트롤러
  */
 @Controller
 @RequiredArgsConstructor
 @Slf4j
-public class FreeBoardController {
+public class BoardController {
 
     private final PostService postService;
+    private final BoardRepository boardRepository;
 
     /**
-     * name: 자유게시판 메인화면
+     * name: 게시판 메인화면
      * author: yunoi
      * date: 2023-12-05
-     * description: 자유게시판의 게시글을 작성일 기준 내림차순으로 최근 10개를 가져온다
+     * description: 해당 게시판의 게시글을 작성일 기준 내림차순으로 최근 10개를 가져온다
      */
     @GetMapping("/board/{boardId}")
-    public String retrieveAllPostsInFreeBoard (@PathVariable("boardId") Long boardId, Model model) {
+    public String retrieveAllPosts (@PathVariable("boardId") Long boardId, Model model) {
         model.addAttribute("posts", postService.getAllPosts(boardId));
-        return "board/free";
+        model.addAttribute("boardId", boardId); // 게시판 ID 전달
+        // 이동할 게시판 파일 경로 조회
+        String boardPath = boardRepository.findOne(boardId).getBoardPath();
+        return boardPath;
     }
 
     /**
-     * name: 자유게시판 글쓰기 폼
+     * name: 게시판 글쓰기 폼
      * author: yunoi
      * date: 2023-12-05
      * description: 글쓰기 폼으로 이동한다
      */
     @GetMapping("/board/{boardId}/posts")
-    public String writePostInFreeBoard (@PathVariable("boardId") Long boardId, Model model) {
-        PostFormDTO post = new PostFormDTO();
-        post.setBoardId(boardId);
-        post.setMemberId(3L);   // TODO: 임시 처리로 회원 ID 하드 코딩
-        model.addAttribute("post", post);
+    public String writePost (@PathVariable("boardId") Long boardId, Model model) {
+        PostFormDTO dto = new PostFormDTO();
+        dto.setBoardId(boardId);
+        dto.setMemberId(3L);   // TODO: 임시 처리로 회원 ID 하드 코딩
+        model.addAttribute("form", dto);
         return "board/postForm";
     }
 
     /**
-     * name: 자유게시판 글쓰기 저장
+     * name: 게시판 글쓰기 저장
      * author: yunoi
      * date: 2023-12-05
      * description: 게시글을 저장하고 자유게시판 메인으로 이동한다
      */
     @PostMapping("/board/{boardId}/posts")
-    public String savePostInFreeBoard (@PathVariable("boardId") Long boardId, @RequestParam("memberId") Long memberId, @RequestParam("subject") String subject, @RequestParam String content) {
+    public String savePost (@PathVariable("boardId") Long boardId, @ModelAttribute("form") PostFormDTO form) {
 
-        postService.writePost(boardId, memberId, subject, content);
+        postService.writePost(boardId, form.getMemberId(), form.getSubject(), form.getContent());
 
         return "redirect:";
     }
 
     /**
-     * name: 자유게시판 글 내용 보기
+     * name: 게시판 글 내용 보기
      * author: yunoi
      * date: 2023-12-05
-     * description: 자유게시판의 글을 조회한다
+     * description: 해당 게시판의 글을 조회한다
      */
     @GetMapping("/board/{boardId}/posts/{postId}")
-    public String viewPostInFreeBoard (@PathVariable("boardId") Long boardId, @PathVariable("postId") Long postId, Model model) {
+    public String viewPost (@PathVariable("boardId") Long boardId, @PathVariable("postId") Long postId, Model model) {
         Post post = postService.viewPost(postId);
         PostViewDTO dto = new PostViewDTO();
+        dto.setBoardId(boardId);
         dto.setPostId(post.getId());
         dto.setWriter(post.getMember().getNickname());
         dto.setSubject(post.getSubject());
@@ -80,13 +85,13 @@ public class FreeBoardController {
     }
 
     /**
-     * name: 자유게시판 글 수정 폼
+     * name: 게시판 글 수정 폼
      * author: yunoi
      * date: 2023-12-05
      * description: 현재 글을 수정하는 폼으로 이동한다
      */
     @GetMapping("/board/{boardId}/posts/{postId}/edit")
-    public String getEditPostFormInFreeBoard (@PathVariable("boardId") Long boardId, @PathVariable("postId") Long postId, Model model) {
+    public String getEditPostForm (@PathVariable("boardId") Long boardId, @PathVariable("postId") Long postId, Model model) {
         Post post = postService.viewPost(postId);
 
         PostFormDTO dto = new PostFormDTO();
@@ -102,25 +107,25 @@ public class FreeBoardController {
     }
 
     /**
-     * name: 자유게시판 글 수정
+     * name: 게시판 글 수정
      * author: yunoi
      * date: 2023-12-05
-     * description: 해당 글을 수정한 후 자유게시판 메인으로 이동한다
+     * description: 해당 글을 수정한 후 해당 게시판 메인으로 이동한다
      */
     @PostMapping("/board/{boardId}/posts/{postId}/edit")
-    public String editPostInFreeBoard (@PathVariable("boardId") Long boardId, @PathVariable("postId") Long postId, @ModelAttribute("form") PostFormDTO form) {
+    public String editPost (@PathVariable("boardId") Long boardId, @PathVariable("postId") Long postId, @ModelAttribute("form") PostFormDTO form) {
         postService.editPost(postId, form.getSubject(), form.getContent());
-        return "redirect:/board/free";
+        return "redirect:";
     }
 
     /**
-     * name: 자유게시판 댓글 쓰기 폼
+     * name: 게시판 댓글 쓰기 폼
      * author: yunoi
      * date: 2023-12-05
-     * description: 자유게시판의 댓글 쓰기 폼으로 이동
+     * description: 해당 게시판의 댓글 쓰기 폼으로 이동
      */
     @GetMapping("/board/{boardId}/posts/{parentPostId}/reply")
-    public String getReplyFormInFreeBoard (@PathVariable("parentPostId") Long parentPostId, Model model) {
+    public String getReplyPostForm (@PathVariable("parentPostId") Long parentPostId, Model model) {
         Post post = postService.viewPost(parentPostId);
         ReplyFormDTO dto = new ReplyFormDTO();
         dto.setBoardId(post.getBoard().getId());
@@ -135,14 +140,16 @@ public class FreeBoardController {
     }
 
     /**
-     * name: 자유게시판 댓글 저장
+     * name: 게시판 댓글 저장
      * author: yunoi
      * date: 2023-12-05
      * description: 해당 글의 댓글 저장
      */
     @PostMapping("/board/{boardId}/posts/{parentPostId}/reply")
-    public String writeReplyPostInFreeBoard (@PathVariable("parentPostId") Long parentPostId, @ModelAttribute("form") ReplyFormDTO form) {
+    public String writeReplyPost (@PathVariable("parentPostId") Long parentPostId, @ModelAttribute("form") ReplyFormDTO form) {
         postService.writeReplyPost(form.getPostGroupId(), parentPostId, form.getBoardId(), form.getMemberId(), form.getSubject(), form.getContent());
-        return "redirect:/board/free";
+        // 이동할 게시판 파일 경로 조회
+        String boardPath = boardRepository.findOne(form.getBoardId()).getBoardPath();
+        return "redirect:" + boardPath;
     }
 }

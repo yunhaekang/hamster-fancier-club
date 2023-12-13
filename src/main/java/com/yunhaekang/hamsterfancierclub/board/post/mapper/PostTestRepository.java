@@ -1,4 +1,4 @@
-package com.yunhaekang.hamsterfancierclub.board.free.post.mapper;
+package com.yunhaekang.hamsterfancierclub.board.post.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 

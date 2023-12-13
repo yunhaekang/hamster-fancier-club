@@ -1,7 +1,7 @@
 package com.yunhaekang.hamsterfancierclub.member;
 
 import com.yunhaekang.hamsterfancierclub.level.Level;
-import com.yunhaekang.hamsterfancierclub.board.free.post.Post;
+import com.yunhaekang.hamsterfancierclub.board.post.Post;
 import lombok.Getter;
 
 import javax.persistence.*;

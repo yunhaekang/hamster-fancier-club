@@ -1,8 +1,7 @@
-package com.yunhaekang.hamsterfancierclub.board.free.post;
+package com.yunhaekang.hamsterfancierclub.board.post;
 
 import com.yunhaekang.hamsterfancierclub.board.Board;
 import com.yunhaekang.hamsterfancierclub.board.BoardRepository;
-import com.yunhaekang.hamsterfancierclub.board.free.post.mapper.PostTestRepository;
 import com.yunhaekang.hamsterfancierclub.member.Member;
 import com.yunhaekang.hamsterfancierclub.member.MemberRepository;
 import lombok.RequiredArgsConstructor;

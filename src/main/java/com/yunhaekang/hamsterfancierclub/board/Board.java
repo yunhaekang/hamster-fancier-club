@@ -1,6 +1,6 @@
 package com.yunhaekang.hamsterfancierclub.board;
 
-import com.yunhaekang.hamsterfancierclub.board.free.post.Post;
+import com.yunhaekang.hamsterfancierclub.board.post.Post;
 import lombok.Getter;
 
 import javax.persistence.*;

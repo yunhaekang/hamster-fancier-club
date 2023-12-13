@@ -1,4 +1,4 @@
-package com.yunhaekang.hamsterfancierclub.board.free.post;
+package com.yunhaekang.hamsterfancierclub.board.post;
 
 import lombok.Getter;
 import lombok.Setter;

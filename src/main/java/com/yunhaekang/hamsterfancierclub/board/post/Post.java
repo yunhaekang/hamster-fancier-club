@@ -1,4 +1,4 @@
-package com.yunhaekang.hamsterfancierclub.board.free.post;
+package com.yunhaekang.hamsterfancierclub.board.post;
 
 import com.yunhaekang.hamsterfancierclub.board.Board;
 import com.yunhaekang.hamsterfancierclub.member.Member;
@@ -36,6 +36,7 @@ public class Post {
 
     public static Post createPost (Board board, Member member, String subject, String content) {
         Post post = new Post();
+        post.setPostGroupId(0L);
         post.setPostOrder(0);
         post.setDepth(0);
         post.setMember(member);

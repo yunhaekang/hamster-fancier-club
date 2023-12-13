@@ -1,4 +1,4 @@
-package com.yunhaekang.hamsterfancierclub.board.free.post;
+package com.yunhaekang.hamsterfancierclub.board.post;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -49,7 +49,7 @@ public class PostRepository {
      * @return
      */
     public List findAll (Long boardId) {
-        TypedQuery<PostDTO> query = em.createQuery("select new com.yunhaekang.hamsterfancierclub.board.free.post.PostDTO(p.id" +
+        TypedQuery<PostDTO> query = em.createQuery("select new com.yunhaekang.hamsterfancierclub.board.post.PostDTO(p.id" +
                         ", p.postGroupId" +
                         ", p.postOrder" +
                         ", p.depth" +

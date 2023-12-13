@@ -10,7 +10,7 @@
   작성일시: <span th:text="${post.registerDateTime}"></span><br/>
   내용 <br/>
   <p th:text="${post.content}"></p>
-  <form action="@{/board/{boardId}/posts/{id}/comment (boardId=${post.boardId}, id=${post.postId})}" method="post">
+  <form th:action="@{/board/{boardId}/posts/{id}/comment (boardId=${post.boardId}, id=${post.postId})}" method="post">
     댓글 <br/>
     <textarea name="content"></textarea>
     <input type="hidden" name="memberId" th:value="${post.memberId}" />

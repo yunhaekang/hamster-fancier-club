@@ -79,6 +79,5 @@ public class PostRepository {
                 .setParameter("postGroupId", postGroupId)
                 .setParameter("nextPostOrder", nextPostOrder)
                 .executeUpdate();
-        em.clear();
     }
 }

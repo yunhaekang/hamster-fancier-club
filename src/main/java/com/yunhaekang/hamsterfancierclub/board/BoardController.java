@@ -61,7 +61,7 @@ public class BoardController {
 
         postService.writePost(boardId, form.getMemberId(), form.getSubject(), form.getContent());
 
-        return "redirect:";
+        return "redirect:/board/" + boardId;
     }
 
     /**
@@ -115,7 +115,7 @@ public class BoardController {
     @PostMapping("/board/{boardId}/posts/{postId}/edit")
     public String editPost (@PathVariable("boardId") Long boardId, @PathVariable("postId") Long postId, @ModelAttribute("form") PostFormDTO form) {
         postService.editPost(postId, form.getSubject(), form.getContent());
-        return "redirect:";
+        return "redirect:/board/" + boardId;
     }
 
     /**
@@ -146,10 +146,8 @@ public class BoardController {
      * description: 해당 글의 댓글 저장
      */
     @PostMapping("/board/{boardId}/posts/{parentPostId}/reply")
-    public String writeReplyPost (@PathVariable("parentPostId") Long parentPostId, @ModelAttribute("form") ReplyFormDTO form) {
+    public String writeReplyPost (@PathVariable("boardId") Long boardId, @PathVariable("parentPostId") Long parentPostId, @ModelAttribute("form") ReplyFormDTO form) {
         postService.writeReplyPost(form.getPostGroupId(), parentPostId, form.getBoardId(), form.getMemberId(), form.getSubject(), form.getContent());
-        // 이동할 게시판 파일 경로 조회
-        String boardPath = boardRepository.findOne(form.getBoardId()).getBoardPath();
-        return "redirect:" + boardPath;
+        return "redirect:/board/" + boardId;
     }
 }
